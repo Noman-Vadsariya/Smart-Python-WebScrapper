@@ -1,113 +1,125 @@
-# Books to Scrape - Web Scraper
+# Books to Scrape - Python Web Scraper
 
-A Python-based web scraper that extracts product data from the Books to Scrape website (https://books.toscrape.com/). The scraper collects detailed book information and stores it in a PostgreSQL database, with support for exporting data to CSV and Excel formats.
+![Banner](gallery/Screenshot%202025-05-31%20at%2010.50.03%E2%80%AFPM.png)
 
-## Features
+A powerful, user-friendly Python web scraper for the [Books to Scrape](https://books.toscrape.com/) website. Collects detailed book data, stores it in a database, and provides both command-line and graphical interfaces for browsing, searching, and exporting your data.
 
-- Scrapes book information including title, price, availability, rating, category, and more
-- Stores data in PostgreSQL database
+---
+
+## 🚀 Features
+
+- Scrapes book information: title, price, availability, rating, category, and more
+- Stores data in a database (PostgreSQL or SQLite)
 - Exports data to CSV and Excel formats
-- Handles pagination and multiple categories
-- Implements rate limiting to be respectful to the server
-- Includes error handling and logging
+- Handles pagination and all categories
+- Rate limiting and robust error handling
+- **NEW:** Browse and search your data with a modern GUI (Tkinter) or CLI viewer
 
-## Prerequisites
+---
 
-- Python 3.x
-- PostgreSQL database
-- Virtual environment (recommended)
+## 🖼️ Live Demo
 
-## Installation
+### GUI Viewer
 
-1. Clone the repository:
+Browse, search, and filter your books with a beautiful desktop app:
 
-```bash
-git clone <repository-url>
-cd <repository-directory>
-```
+![GUI Demo 1](gallery/Screenshot%202025-05-31%20at%2010.50.19%E2%80%AFPM.png)
+![GUI Demo 2](gallery/Screenshot%202025-05-31%20at%2010.51.01%E2%80%AFPM.png)
 
-2. Create and activate a virtual environment:
+### Data Export Example
 
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+Export your data to Excel or CSV for further analysis:
 
-3. Install dependencies:
+![Excel Export](gallery/Screenshot%202025-05-31%20at%2010.53.15%E2%80%AFPM.png)
 
-```bash
-pip install -r requirements.txt
-```
+---
 
-4. Create a `.env` file in the project root with your database configuration:
+## 🛠️ Installation
 
-```
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=book_scraper
-DB_USER=your_username
-DB_PASSWORD=your_password
-```
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
+2. **Create and activate a virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Configure your database:**
+   - For PostgreSQL, create a `.env` file:
+     ```
+     DB_HOST=localhost
+     DB_PORT=5432
+     DB_NAME=book_scraper
+     DB_USER=your_username
+     DB_PASSWORD=your_password
+     ```
+   - For SQLite, default config is used (see `config.py`).
 
-5. Create the PostgreSQL database:
+---
 
-```bash
-createdb book_scraper
-```
+## ⚡ Usage
 
-## Usage
+1. **Initialize the database:**
+   ```python
+   from models import init_db
+   init_db()
+   ```
+2. **Run the scraper:**
+   ```bash
+   python scraper.py
+   ```
+3. **Export data to CSV or Excel:**
+   ```bash
+   python export_utils.py
+   ```
+4. **View your data:**
+   - **Graphical Viewer:**
+     ```bash
+     python gui_viewer.py
+     ```
+   - **Command-Line Viewer:**
+     ```bash
+     python view_data.py
+     ```
 
-1. Initialize the database:
+---
 
-```python
-from models import init_db
-init_db()
-```
-
-2. Run the scraper:
-
-```bash
-python scraper.py
-```
-
-3. Export data to CSV or Excel:
-
-```bash
-python export_utils.py
-```
-
-## Project Structure
+## 📁 Project Structure
 
 - `scraper.py`: Main scraper module
 - `models.py`: Database models and configuration
 - `config.py`: Configuration settings
 - `export_utils.py`: Data export utilities
+- `gui_viewer.py`: Tkinter GUI for browsing/searching books
+- `view_data.py`: CLI tool for stats and quick views
 - `requirements.txt`: Project dependencies
+- `gallery/`: Screenshots and demo images
 
-## Data Export
+---
 
-The scraper supports exporting data in two formats:
+## 📤 Data Export
 
-1. CSV Export:
+- **CSV:** Saved in `exports/csv/` with timestamps
+- **Excel:** Saved in `exports/excel/` with auto-adjusted columns
 
-   - Files are saved in the `exports/csv` directory
-   - Filenames include timestamps for versioning
+---
 
-2. Excel Export:
-   - Files are saved in the `exports/excel` directory
-   - Includes auto-adjusted column widths
-   - Filenames include timestamps for versioning
-
-## Error Handling
-
-The scraper includes comprehensive error handling:
+## 🛡️ Error Handling
 
 - Logs errors to console
 - Continues scraping even if individual books fail
 - Maintains database transaction integrity
 - Handles network errors gracefully
 
-## Contributing
+---
+
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -115,6 +127,8 @@ The scraper includes comprehensive error handling:
 4. Push to the branch
 5. Create a Pull Request
 
-## License
+---
+
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
